@@ -6,6 +6,7 @@ import 'package:the_barber/firebase_options.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/common/services/storage.dart';
 import 'package:the_barber/src/common/theme/theme_index.dart';
+import 'package:the_barber/src/screens/splash/index.dart';
 
 import './src/common/helper/dependicies.dart' as dep;
 
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           getPages: AppPages.routes,
         );
       },
-      //child: const HomeScreen(),
+      child: const SplashScreen(),
     );
   }
 }

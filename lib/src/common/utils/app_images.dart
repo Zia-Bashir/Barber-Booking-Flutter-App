@@ -2,7 +2,8 @@
 
 //? ---- Logo ----
 
-const String chatterLogo = "assets/images/logo.svg";
+const String barberLogoTop = "assets/logo/logo-top.svg";
+const String barberLogoBottom = "assets/logo/logo-bottom.svg";
 
 //? ---- Images ----
 
