@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/screens/splash/index.dart';
 
+import '../../common/routes/routes.dart';
 import '../../common/services/storage.dart';
 
 class SplashController extends GetxController {
@@ -16,13 +17,14 @@ class SplashController extends GetxController {
 
     Future.delayed(
       const Duration(seconds: 3),
-      // (() {
-      //   if (state.logIn == true) {
-      //     Get.offAllNamed(AppRoutes.APPLICATION);
-      //   } else {
-      //     Get.offAllNamed(AppRoutes.SIGNIN);
-      //   }
-      // }),
+      (() {
+        Get.offAllNamed(AppRoutes.AUTH);
+        // if (state.logIn == true) {
+        //   Get.offAllNamed(AppRoutes.APPLICATION);
+        // } else {
+        //   Get.offAllNamed(AppRoutes.SIGNIN);
+        // }
+      }),
     );
   }
 }

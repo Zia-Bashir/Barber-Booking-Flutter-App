@@ -25,4 +25,4 @@ const String icon7 = "assets/icons/7.png";
 
 //? -------- Json -------
 
-const String loading = "assets/json/Loading.json";
+const String loadingLottie = "assets/json/loading.json";

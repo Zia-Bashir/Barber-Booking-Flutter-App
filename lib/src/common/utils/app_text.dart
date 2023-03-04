@@ -1,10 +1,8 @@
 //= App Texts
-const String tTitle = "chattr.";
-const String tChat = "Chat";
-const String tSetting = "Setting";
 
-const String tWelcomeTitle =
-    "Enjoy the new experience of\nchating with global friends";
-const String tWelcomeSubtitle = "Connect people around the world for free";
+const String tAuthTagLine =
+    "Enjoy the new experience of grooming like never before";
+const String tAuthRichText = "Look Sharp, Feel Confident";
 const String tWelcomeTerms1 = "By creating an account, you accept our";
 const String tWelcomeTerms2 = "Terms and Conditions.";
+const String tGoole = "Continue with Google";

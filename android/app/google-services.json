@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "402078791499-ei6l8ln3t6b6k4nn4lqucibjr2v8rr5s.apps.googleusercontent.com",
+          "client_id": "402078791499-0hq1t30hlos22ab3hdn60j2gibop9dce.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +27,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "402078791499-ei6l8ln3t6b6k4nn4lqucibjr2v8rr5s.apps.googleusercontent.com",
+              "client_id": "402078791499-0hq1t30hlos22ab3hdn60j2gibop9dce.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "402078791499-7h13q2kehaeeqqfenhg5kf097f8g3j4s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.theBarber"
+              }
             }
           ]
         }

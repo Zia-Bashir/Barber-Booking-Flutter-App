@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
@@ -11,6 +10,8 @@ class UserData {
   final String? location;
   final String? fcmtoken;
   final Timestamp? addtime;
+  final String? phoneNumber;
+  final bool? completeProfile;
 
   UserData({
     this.id,
@@ -20,6 +21,8 @@ class UserData {
     this.location,
     this.fcmtoken,
     this.addtime,
+    this.phoneNumber,
+    this.completeProfile,
   });
 
   factory UserData.fromFirestore(
@@ -35,6 +38,8 @@ class UserData {
       location: data?['location'],
       fcmtoken: data?['fcmtoken'],
       addtime: data?['addtime'],
+      phoneNumber: data?['phoneNumber'],
+      completeProfile: data?['completeProfile'],
     );
   }
 
@@ -47,6 +52,8 @@ class UserData {
       if (location != null) "location": location,
       if (fcmtoken != null) "fcmtoken": fcmtoken,
       if (addtime != null) "addtime": addtime,
+      "phoneNumber": phoneNumber,
+      "completeProfile": completeProfile,
     };
   }
 }
@@ -79,25 +86,3 @@ class UserLoginResponseEntity {
         "photoUrl": photoUrl,
       };
 }
-
-class MeListItem {
-  String? name;
-  String? icon;
-  String? explain;
-  String? route;
-
-  MeListItem({
-    this.name,
-    this.icon,
-    this.explain,
-    this.route,
-  });
-
-  factory MeListItem.fromJson(Map<String, dynamic> json) => MeListItem(
-        name: json["name"],
-        icon: json["icon"],
-        explain: json["explain"],
-        route: json["route"],
-      );
-}
-

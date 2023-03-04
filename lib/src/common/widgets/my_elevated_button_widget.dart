@@ -1,4 +1,5 @@
 import 'package:flutter/Material.dart';
+import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/widgets/mytext_widget.dart';
 
 class MyElevatedButtonWidget extends StatelessWidget {
@@ -21,7 +22,10 @@ class MyElevatedButtonWidget extends StatelessWidget {
               style: Theme.of(context).elevatedButtonTheme.style,
               child: MyTextWidget(
                 title: text,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    ?.copyWith(color: AppColors.secondryColor),
               )),
         ),
       ],

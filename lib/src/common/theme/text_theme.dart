@@ -40,9 +40,7 @@ class AppTextTheme {
       fontWeight: FontWeight.w600,
     ),
     bodyText1: GoogleFonts.archivo(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
-        color: AppColors.mainColor),
+        fontSize: 10.sp, fontWeight: FontWeight.w100, color: Colors.white),
     bodyText2: GoogleFonts.archivo(
         fontSize: 24.sp,
         fontWeight: FontWeight.w400,
