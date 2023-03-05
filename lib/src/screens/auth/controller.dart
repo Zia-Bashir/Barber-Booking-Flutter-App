@@ -33,11 +33,7 @@ class AuthController extends GetxController {
   }
 
   handleGoogleSignIn() async {
-    print('---------1');
-
     try {
-      print('---------2');
-
       var user = await _googleSignIn.signIn();
       if (user != null) {
         //* ---- Get User Google Authentication
@@ -49,7 +45,6 @@ class AuthController extends GetxController {
         );
         //* ---- SignIn with Credentials
         await auth.signInWithCredential(credential);
-        print('---------3');
 
         //= ---- Storing User Data
         String displayName = user.displayName ?? user.email;
@@ -61,13 +56,9 @@ class AuthController extends GetxController {
         userProfile.accessToken = id;
         userProfile.email = email;
         userProfile.photoUrl = photoUrl;
-        print('---------4');
 
         //* --- Store UserProfile in Local Storage ----
-        var abc = UserStore.to.saveProfile(userProfile);
-        print('User data ----- ${abc.toString()}');
-
-        print('---------5');
+        UserStore.to.saveProfile(userProfile);
 
         //* --- Check if user firebase is exist or not ----
         var userBase = await userRF
@@ -77,7 +68,6 @@ class AuthController extends GetxController {
                     userData.toFirestore())
             .where("id", isEqualTo: id)
             .get();
-        print('---------6');
 
         //* --- If not exist ----
         if (userBase.docs.isEmpty) {
@@ -92,7 +82,6 @@ class AuthController extends GetxController {
             completeProfile: false,
             phoneNumber: '',
           );
-          print('---------7');
 
           //* --- Add data in collection ----
           await userRF
@@ -102,7 +91,6 @@ class AuthController extends GetxController {
                       userData.toFirestore())
               .add(data);
         }
-        print('---------8');
 
         toastInfo(msg: "Login Success");
         await StorageServices.to.setBool(LOGIN_STATE, true);
