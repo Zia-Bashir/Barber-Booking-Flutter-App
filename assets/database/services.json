@@ -1,0 +1,328 @@
+{
+    "id":"Services",
+    "products":[
+        {
+            "serviceId":"s001",
+            "title":"Basic Shave",
+            "description":"This is a quick and simple shave that involves using a straight razor or safety razor to shave the face, neck, and jawline. The barber will apply a hot towel to the face first to soften the hair and open up the pores. This is a good option for those who need a quick trim and clean-up.",
+            "price":20.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s002",
+            "title":"Deluxe Shave",
+            "description":"This is a more luxurious version of the basic shave that includes additional steps such as a pre-shave oil, a face massage, and a post-shave balm. The barber will use high-quality products and take extra time to ensure a smooth and comfortable shave.",
+            "price":15.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":"recommended"
+            
+        },
+        {
+            "serviceId":"s003",
+            "title":"Beard Trim",
+            "description":"If you have a beard or goatee, a barber can help you keep it looking neat and tidy with a beard trim. They will use clippers and scissors to trim the hair to the desired length and shape.",
+            "price":15.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s004",
+            "title":"Straight Razor Shave",
+            "description":"A straight razor shave is a traditional technique that involves using a straight razor to shave the face. This method provides a closer shave and can be more precise than using a safety razor. The barber will use a hot towel to soften the hair and apply a lather of shaving cream before shaving the face.",
+            "price":29.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s005",
+            "title":"Head Shave",
+            "description":"If you prefer a bald head, a barber can give you a smooth and even shave using a razor or clippers. They will also apply a moisturizing lotion to prevent any irritation or razor burn.",
+            "price":25.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s006",
+            "title":"Hot Towel Shave",
+            "description":"A hot towel shave is a relaxing and luxurious experience that involves multiple hot towels to help soften the hair and open up the pores. The barber will also use high-quality products and a straight razor to provide a close and comfortable shave.",
+            "price":24.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"shaving",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s007",
+            "title":"Full Service Shave",
+            "description":"This is the ultimate shaving experience that includes all of the services mentioned above, plus additional steps such as a facial, a scalp massage, and a hot towel wrap. This is a great option for those who want to indulge in a pampering and rejuvenating experience.",
+            "price":49.99,
+            "discount":10,
+            "discountedPrice":44.99,
+            "categoryName":"shaving",
+            "tag":"best"
+            
+        },
+        
+        {
+            "serviceId":"s008",
+            "title":"Haircut",
+            "description":"A basic haircut that includes a consultation, shampoo, cut, and styling.",
+            "price":19.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s009",
+            "title":"Hair Color",
+            "description":"Hair color services include full hair color, highlights, and lowlights. Price varies depending on the type of color service and the amount of hair that needs to be colored.",
+            "price":99.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s010",
+            "title":"Haircut",
+            "description":"A perm is a hair treatment that involves adding curls or waves to straight hair",
+            "price":60.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s010",
+            "title":"Perm",
+            "description":"A perm is a hair treatment that involves adding curls or waves to straight hair",
+            "price":60.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s011",
+            "title":"Hair Extensions",
+            "description":"Hair extensions are a great way to add length, volume, and fullness to hair.",
+            "price":299.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s012",
+            "title":"Scalp Treatment",
+            "description":"Scalp treatments include deep conditioning, scalp massage, and hair mask.",
+            "price":40.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s013",
+            "title":"Hair Braiding",
+            "description":"Hair braiding services include cornrows, box braids, and other popular styles",
+            "price":80.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s014",
+            "title":"Hair Straightening",
+            "description":"Hair straightening services include chemical straightening, Brazilian blowout, and keratin treatments",
+            "price":60.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+        {
+            "serviceId":"s015",
+            "title":"Hair Styling",
+            "description":"Hair styling services include blowouts, updos, and braids.",
+            "price":30.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""
+            
+        },
+
+
+
+        {
+            "serviceId":"s016",
+            "title":"Basic Beard Trim",
+            "description":"This service includes a trim of the beard to a desired length, shaping of the beard to enhance its appearance, and cleaning up of stray hairs.",
+            "price":15.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s017",
+            "title":"Beard Sculpting",
+            "description":"This service is ideal for those who want a more defined look for their beard. It includes trimming the beard to a specific length, shaping it to enhance its appearance, and creating defined lines.",
+            "price":25.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s018",
+            "title":"Beard Line Up",
+            "description":"This service is designed to create clean, sharp lines around the edges of the beard. It includes trimming and shaping the beard to the desired length, and creating sharp lines around the beard.",
+            "price":20.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s019",
+            "title":"Full Beard Grooming",
+            "description":"This service includes a complete grooming of the beard. It includes trimming, shaping, and cleaning up the beard, as well as moisturizing and conditioning the beard.",
+            "price":35.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s020",
+            "title":"Beard Coloring",
+            "description":"This service is ideal for those who want to add some color to their beard. It includes coloring the beard to the desired shade, and conditioning it to keep it looking healthy.",
+            "price":45.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s021",
+            "title":"Beard Straightening",
+            "description":"This service is designed to straighten curly or wavy beards. It includes straightening the beard using a flat iron, and conditioning it to keep it looking healthy.",
+            "price":50.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s022",
+            "title":"Beard Oil Treatment",
+            "description":"This service is designed to nourish and moisturize the beard. It includes the application of beard oil to the beard, which helps to hydrate the skin and reduce beard dandruff.",
+            "price":10.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"beard",
+            "tag":""  
+        },
+        {
+            "serviceId":"s023",
+            "title":"Basic Hair Wash",
+            "description":"This service includes shampooing and conditioning the hair, followed by a gentle massage of the scalp.",
+            "price":10.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        },
+        {
+            "serviceId":"s024",
+            "title":"Deluxe Hair Wash",
+            "description":" In addition to the basic hair wash, this service also includes a hot towel treatment and a longer scalp massage.",
+            "price":20.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":"best"  
+        },
+        {
+            "serviceId":"s025",
+            "title":"Deep Cleansing Hair Wash",
+            "description":"This service is ideal for customers with oily or greasy hair. It includes a deep cleansing shampoo and conditioner, as well as a scalp scrub to remove buildup.",
+            "price":25.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        },
+        {
+            "serviceId":"s026",
+            "title":"Scalp Treatment Hair Wash",
+            "description":"This service is designed to soothe a dry, itchy, or irritated scalp. It includes a special shampoo and conditioner, as well as a scalp treatment to moisturize and nourish the skin.",
+            "price":30.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        },
+        {
+            "serviceId":"s027",
+            "title":"Color-Safe Hair Wash",
+            "description":" This service is specifically designed for customers who have color-treated hair. It includes a color-safe shampoo and conditioner to protect the hair's color and vibrancy.",
+            "price":15.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        },
+        {
+            "serviceId":"s028",
+            "title":"Keratin Hair Wash",
+            "description":"This service is perfect for customers who have had a keratin treatment. It includes a special shampoo and conditioner to maintain the hair's smoothness and shine.",
+            "price":35.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        },
+        {
+            "serviceId":"s029",
+            "title":"Clarifying Hair Wash",
+            "description":"This service is ideal for customers who use a lot of styling products or have hard water buildup in their hair. It includes a clarifying shampoo and conditioner to remove impurities and buildup.",
+            "price":20.99,
+            "discount":null,
+            "discountedPrice":null,
+            "categoryName":"hair",
+            "tag":""  
+        }
+        
+       
+    ]
+    
+}

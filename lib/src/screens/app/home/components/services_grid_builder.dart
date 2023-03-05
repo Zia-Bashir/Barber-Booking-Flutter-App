@@ -18,6 +18,7 @@ class ServicesGridBuilder extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //= ------------------ Animation ------------------
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: AnimationConfiguration.toStaggeredList(
@@ -74,27 +75,39 @@ class ServicesGridBuilder extends StatelessWidget {
                   child: FadeInAnimation(
                     duration: const Duration(seconds: 2),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20.h,
-                        horizontal: 20.w,
-                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
                         color: Colors.white,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SvgPicture.asset(servicesModel[index].imgUrl!,
-                              height: 100.r),
-                          SizedBox(
-                            height: 10.h,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.r),
+                        child: Material(
+                          color: Colors.white,
+                          child: InkWell(
+                            onTap: () {},
+                            splashColor: AppColors.mainColor,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 20.h,
+                                horizontal: 20.w,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SvgPicture.asset(servicesModel[index].imgUrl!,
+                                      height: 100.r),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    servicesModel[index].title!,
+                                    style: style.subtitle1,
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
-                          Text(
-                            servicesModel[index].title!,
-                            style: style.subtitle1,
-                          )
-                        ],
+                        ),
                       ),
                     ),
                   ),
