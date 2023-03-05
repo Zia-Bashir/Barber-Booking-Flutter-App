@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/common/widgets/my_elevated_button_widget.dart';
 import 'package:the_barber/src/screens/auth/components/components.dart';
+
 import 'package:the_barber/src/screens/auth/controller.dart';
 
 class AuthScreen extends GetView<AuthController> {

@@ -10,7 +10,6 @@ import 'package:the_barber/src/common/store/user.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/common/widgets/widget.dart';
 import 'package:the_barber/src/screens/auth/index.dart';
-import 'package:the_barber/src/screens/home/view.dart';
 
 import '../../common/services/services.dart';
 
@@ -107,7 +106,7 @@ class AuthController extends GetxController {
 
         toastInfo(msg: "Login Success");
         await StorageServices.to.setBool(LOGIN_STATE, true);
-        Get.to(() => const Homescreen());
+        //Get.to(() => const Homescreen());
         //Get.offAllNamed(AppRoutes.APPLICATION);
       }
     } catch (e) {
