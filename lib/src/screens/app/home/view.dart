@@ -29,7 +29,6 @@ class HomeScreen extends GetView<HomeController> {
               TextWithSearchContainer(style: style),
 
               //* ------------------ Services ------------------
-              //= ------------------ Animation 3 ------------------
 
               ServicesGridBuilder(style: style),
             ],

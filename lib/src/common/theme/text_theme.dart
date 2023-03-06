@@ -42,21 +42,20 @@ class AppTextTheme {
     bodyText1: GoogleFonts.archivo(
         fontSize: 10.sp, fontWeight: FontWeight.w100, color: Colors.white),
     bodyText2: GoogleFonts.archivo(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w400,
+        fontSize: 8.sp,
+        fontWeight: FontWeight.w100,
         color: AppColors.mainColor),
     button: GoogleFonts.archivo(
       fontSize: 15,
       fontWeight: FontWeight.w500,
     ),
     caption: GoogleFonts.archivo(
-      fontSize: 13,
-      fontWeight: FontWeight.w400,
-    ),
-    overline: GoogleFonts.archivo(
       fontSize: 10,
       fontWeight: FontWeight.w400,
+      color: AppColors.darkColor,
     ),
+    overline: GoogleFonts.archivo(
+        fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.darkColor),
   );
   //* -- Dark Text Theme
   static TextTheme darkTextTheme = TextTheme(

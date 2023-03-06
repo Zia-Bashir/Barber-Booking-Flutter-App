@@ -258,7 +258,7 @@
             "price":10.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         },
         {
@@ -268,7 +268,7 @@
             "price":20.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":"best"  
         },
         {
@@ -278,7 +278,7 @@
             "price":25.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         },
         {
@@ -288,7 +288,7 @@
             "price":30.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         },
         {
@@ -298,7 +298,7 @@
             "price":15.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         },
         {
@@ -308,7 +308,7 @@
             "price":35.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         },
         {
@@ -318,7 +318,7 @@
             "price":20.99,
             "discount":null,
             "discountedPrice":null,
-            "categoryName":"hair",
+            "categoryName":"washing",
             "tag":""  
         }
         

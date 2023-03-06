@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:the_barber/src/common/entities/entities.dart';
+import 'package:the_barber/src/common/routes/names.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
+
+import '../../../../common/widgets/widget.dart';
 
 class ServicesGridBuilder extends StatelessWidget {
   const ServicesGridBuilder({
@@ -18,38 +22,7 @@ class ServicesGridBuilder extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        //= ------------------ Animation ------------------
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: AnimationConfiguration.toStaggeredList(
-              duration: const Duration(milliseconds: 800),
-              delay: const Duration(seconds: 2),
-              childAnimationBuilder: (widget) => SlideAnimation(
-                    horizontalOffset: -50.0,
-                    delay: const Duration(seconds: 2),
-                    child: FadeInAnimation(
-                      duration: const Duration(seconds: 1),
-                      child: widget,
-                    ),
-                  ),
-              children: [
-                //* ------------------ Services Text ------------------
-                Text(
-                  "Services",
-                  style: style.headline2,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                  child: Container(
-                    width: 50.w,
-                    height: 3.h,
-                    decoration: const BoxDecoration(
-                      color: AppColors.darkColor,
-                    ),
-                  ),
-                ),
-              ]),
-        ),
+        const AnimatedTitleWithBarWidget(text: "Services"),
 
         //= ------------------ Animation ------------------
 
@@ -67,13 +40,13 @@ class ServicesGridBuilder extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
-                duration: const Duration(milliseconds: 375),
+                duration: const Duration(milliseconds: 500),
                 columnCount: 4,
                 child: SlideAnimation(
-                  duration: const Duration(seconds: 2),
+                  duration: const Duration(milliseconds: 1000),
                   verticalOffset: 50.0,
                   child: FadeInAnimation(
-                    duration: const Duration(seconds: 2),
+                    duration: const Duration(milliseconds: 1000),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
@@ -84,7 +57,13 @@ class ServicesGridBuilder extends StatelessWidget {
                         child: Material(
                           color: Colors.white,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              var tag = servicesModel[index].tag!;
+                              Get.toNamed(AppRoutes.SERVICES, parameters: {
+                                'index': index.toString(),
+                                'tag': tag,
+                              });
+                            },
                             splashColor: AppColors.mainColor,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
@@ -94,8 +73,12 @@ class ServicesGridBuilder extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SvgPicture.asset(servicesModel[index].imgUrl!,
-                                      height: 100.r),
+                                  Hero(
+                                    tag: servicesModel[index].tag!,
+                                    child: SvgPicture.asset(
+                                        servicesModel[index].imgUrl!,
+                                        height: 100.r),
+                                  ),
                                   SizedBox(
                                     height: 10.h,
                                   ),

@@ -4,4 +4,5 @@ class AppRoutes {
   static const INITIAL = '/';
   static const AUTH = '/auth';
   static const HOME = '/home';
+  static const SERVICES = '/services';
 }
