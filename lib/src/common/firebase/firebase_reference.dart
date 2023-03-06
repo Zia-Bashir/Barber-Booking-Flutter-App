@@ -7,3 +7,4 @@ final auth = FirebaseAuth.instance;
 final storage = FirebaseStorage.instance;
 
 final userRF = firestore.collection("UserData");
+final servicesRF = firestore.collection("Services");
