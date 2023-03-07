@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
+import 'package:the_barber/src/common/routes/names.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/utils/app_sizes.dart';
 
@@ -62,40 +64,48 @@ class TextWithSearchContainer extends StatelessWidget {
                   ),
               children: [
                 //* ------------------ Search Bar Container ------------------
-                Container(
-                  width: screenWidth,
-                  height: 50.h,
-                  margin: EdgeInsets.only(top: 20.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.r),
-                      color: Colors.white),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 25.w),
-                          child: Text(
-                            "Search Services",
-                            style: style.subtitle1,
-                          ),
-                        ),
-                        ClipRRect(
+                Hero(
+                  tag: "search",
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.SEARCH);
+                    },
+                    child: Container(
+                      width: screenWidth,
+                      height: 50.h,
+                      margin: EdgeInsets.only(top: 20.h),
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.r),
-                          child: Container(
-                            width: 80.w,
-                            height: 50.h,
-                            color: AppColors.darkColor,
-                            child: Center(
-                              child: Icon(
-                                Icons.search,
-                                color: AppColors.mainColor,
-                                size: 30.r,
+                          color: Colors.white),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 25.w),
+                              child: Text(
+                                "Search Services",
+                                style: style.subtitle1,
                               ),
                             ),
-                          ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(25.r),
+                              child: Container(
+                                width: 80.w,
+                                height: 50.h,
+                                color: AppColors.darkColor,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.search,
+                                    color: AppColors.mainColor,
+                                    size: 30.r,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

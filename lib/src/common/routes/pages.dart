@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/screens/app/home/index.dart';
+import 'package:the_barber/src/screens/app/search/index.dart';
 import 'package:the_barber/src/screens/app/services/index.dart';
 import 'package:the_barber/src/screens/auth/index.dart';
 import 'package:the_barber/src/screens/splash/index.dart';
@@ -33,6 +34,13 @@ class AppPages {
       name: AppRoutes.SERVICES,
       page: () => const ServicesScreen(),
       binding: ServicesBinding(),
+    ),
+
+    //= -- Search Route
+    GetPage(
+      name: AppRoutes.SEARCH,
+      page: () => const SearchScreen(),
+      binding: SearchBinding(),
     ),
   ];
 }

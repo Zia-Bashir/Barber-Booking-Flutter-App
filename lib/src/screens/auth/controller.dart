@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/entities/entities.dart';
 import 'package:the_barber/src/common/firebase/firebase_reference.dart';
+import 'package:the_barber/src/common/routes/names.dart';
 import 'package:the_barber/src/common/store/user.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/common/widgets/widget.dart';
@@ -95,7 +96,7 @@ class AuthController extends GetxController {
         toastInfo(msg: "Login Success");
         await StorageServices.to.setBool(LOGIN_STATE, true);
         //Get.to(() => const Homescreen());
-        //Get.offAllNamed(AppRoutes.APPLICATION);
+        Get.offAllNamed(AppRoutes.HOME);
       }
     } catch (e) {
       toastInfo(msg: "Error", backgroundColor: Colors.red);
