@@ -95,7 +95,7 @@ class AuthController extends GetxController {
 
         toastInfo(msg: "Login Success");
         await StorageServices.to.setBool(LOGIN_STATE, true);
-        //Get.to(() => const Homescreen());
+
         Get.offAllNamed(AppRoutes.HOME);
       }
     } catch (e) {

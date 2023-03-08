@@ -4,7 +4,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/utils/app_sizes.dart';
-import 'package:the_barber/src/common/widgets/animated_title_with_bar_widget.dart';
+import 'package:the_barber/src/common/widgets/widget.dart';
+import 'package:the_barber/src/screens/app/cart/controller.dart';
 
 class BestSellerServices extends StatelessWidget {
   const BestSellerServices({
@@ -16,6 +17,7 @@ class BestSellerServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cartController = CartController();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,13 +79,47 @@ class BestSellerServices extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          "\$ ${snapshot.data.docs![index]['price']}",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.clip,
-                                          style: style.headline3?.copyWith(
-                                              color: AppColors.secondryColor),
-                                        ),
+                                        snapshot.data.docs![index]
+                                                    ['discount'] ==
+                                                null
+                                            ? Text(
+                                                "\$ ${snapshot.data.docs![index]['price']}",
+                                                maxLines: 1,
+                                                overflow: TextOverflow.clip,
+                                                style: style.headline3
+                                                    ?.copyWith(
+                                                        color: AppColors
+                                                            .secondryColor),
+                                              )
+                                            : Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "\$ ${snapshot.data.docs![index]['price']}",
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.clip,
+                                                    style: style.caption
+                                                        ?.copyWith(
+                                                            color: AppColors
+                                                                .darkColor,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .lineThrough),
+                                                  ),
+                                                  Text(
+                                                    "\$ ${snapshot.data.docs![index]['discountedPrice']}",
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.clip,
+                                                    style: style.headline3
+                                                        ?.copyWith(
+                                                            color: AppColors
+                                                                .secondryColor),
+                                                  )
+                                                ],
+                                              ),
                                         SizedBox(
                                           height: 10.h,
                                         ),
@@ -127,8 +163,51 @@ class BestSellerServices extends StatelessWidget {
                                       right: 0,
                                       bottom: 2.h,
                                       child: GestureDetector(
-                                        //TODO Add gesture
-                                        onTap: () {},
+                                        onTap: () async {
+                                          try {
+                                            String serviceId = snapshot
+                                                .data.docs![0]['serviceId'];
+                                            double servicePrice =
+                                                snapshot.data.docs![0]['price'];
+                                            double discountPrice = 0.0;
+
+                                            //* ------------------ Check Discount Price ------------------
+
+                                            if (snapshot.data.docs![0]
+                                                    ['discountedPrice'] !=
+                                                null) {
+                                              discountPrice = snapshot.data
+                                                  .docs![0]['discountedPrice'];
+                                            }
+
+                                            //* ------------------ Check if service already Available  ------------------
+
+                                            var querySnapshot = await cartRF
+                                                .where('serviceId',
+                                                    isEqualTo: serviceId)
+                                                .get();
+                                            if (querySnapshot.docs.isNotEmpty) {
+                                              toastInfo(
+                                                  msg:
+                                                      "Aldready Available in Cart",
+                                                  backgroundColor:
+                                                      AppColors.darkColor);
+                                            } else {
+                                              cartController.addedToCart(
+                                                  serviceId: serviceId,
+                                                  servicePrice: servicePrice,
+                                                  discountPrice: discountPrice);
+                                              toastInfo(
+                                                  msg: "Added to Cart",
+                                                  backgroundColor:
+                                                      AppColors.darkColor);
+                                            }
+                                          } catch (e) {
+                                            toastInfo(
+                                                msg: "Error",
+                                                backgroundColor: Colors.red);
+                                          }
+                                        },
                                         child: const Icon(
                                           Icons.shopping_bag,
                                           color: AppColors.darkColor,

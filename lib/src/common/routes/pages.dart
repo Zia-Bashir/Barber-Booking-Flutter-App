@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
+import 'package:the_barber/src/screens/app/cart/index.dart';
 import 'package:the_barber/src/screens/app/detail/index.dart';
 import 'package:the_barber/src/screens/app/home/index.dart';
 import 'package:the_barber/src/screens/app/search/index.dart';
@@ -49,6 +50,13 @@ class AppPages {
       name: AppRoutes.DETAIL,
       page: () => const DetailScreen(),
       binding: DetailBinding(),
+    ),
+
+    //= -- Cart Route
+    GetPage(
+      name: AppRoutes.CART,
+      page: () => const CartScreen(),
+      binding: CartBinding(),
     ),
   ];
 }

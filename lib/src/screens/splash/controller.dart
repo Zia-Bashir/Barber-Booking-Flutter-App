@@ -18,12 +18,11 @@ class SplashController extends GetxController {
     Future.delayed(
       const Duration(seconds: 3),
       (() {
-        Get.offAllNamed(AppRoutes.AUTH);
-        // if (state.logIn == true) {
-        //   Get.offAllNamed(AppRoutes.APPLICATION);
-        // } else {
-        //   Get.offAllNamed(AppRoutes.SIGNIN);
-        // }
+        if (state.logIn == true) {
+          Get.offAllNamed(AppRoutes.HOME);
+        } else {
+          Get.offAllNamed(AppRoutes.AUTH);
+        }
       }),
     );
   }

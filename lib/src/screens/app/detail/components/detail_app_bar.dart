@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
+import 'package:the_barber/src/common/widgets/widget.dart';
 import 'package:the_barber/src/screens/app/detail/controller.dart';
 
 PreferredSize detailAppBar(BuildContext context, DetailController controller) {
@@ -32,10 +33,10 @@ PreferredSize detailAppBar(BuildContext context, DetailController controller) {
                 controller.state.servicesTitle,
                 style: style.headline4?.copyWith(color: AppColors.darkColor),
               ),
-              const Icon(
-                Icons.shopping_bag,
-                color: AppColors.secondryColor,
-              )
+
+              //* ------------------ Cart Button ------------------
+
+              const CartButton(),
             ],
           ),
         ),

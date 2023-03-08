@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
+import 'package:the_barber/src/common/widgets/widget.dart';
+import 'package:the_barber/src/screens/app/cart/controller.dart';
 import 'package:the_barber/src/screens/app/detail/components/components.dart';
 import 'package:the_barber/src/screens/app/detail/controller.dart';
 
@@ -13,6 +15,7 @@ class DetailScreen extends GetView<DetailController> {
   @override
   Widget build(BuildContext context) {
     var style = Theme.of(context).textTheme;
+    var cartController = CartController();
     return Scaffold(
       backgroundColor: AppColors.secondryColor,
       appBar: detailAppBar(context, controller),
@@ -116,7 +119,45 @@ class DetailScreen extends GetView<DetailController> {
                       right: 0,
                       child: ElevatedButton.icon(
                         style: Theme.of(context).elevatedButtonTheme.style,
-                        onPressed: () {},
+                        onPressed: () async {
+                          try {
+                            String serviceId =
+                                snapshot.data.docs![0]['serviceId'];
+                            double servicePrice =
+                                snapshot.data.docs![0]['price'];
+                            double discountPrice = 0.0;
+
+                            //* ------------------ Check Discount Price ------------------
+
+                            if (snapshot.data.docs![0]['discountedPrice'] !=
+                                null) {
+                              discountPrice =
+                                  snapshot.data.docs![0]['discountedPrice'];
+                            }
+
+                            //* ------------------ Check if service already Available  ------------------
+
+                            var querySnapshot = await cartRF
+                                .where('serviceId', isEqualTo: serviceId)
+                                .get();
+                            if (querySnapshot.docs.isNotEmpty) {
+                              toastInfo(
+                                  msg: "Aldready Available in Cart",
+                                  backgroundColor: AppColors.darkColor);
+                            } else {
+                              cartController.addedToCart(
+                                  serviceId: serviceId,
+                                  servicePrice: servicePrice,
+                                  discountPrice: discountPrice);
+                              toastInfo(
+                                  msg: "Added to Cart",
+                                  backgroundColor: AppColors.darkColor);
+                            }
+                          } catch (e) {
+                            toastInfo(
+                                msg: "Error", backgroundColor: Colors.red);
+                          }
+                        },
                         icon: const Icon(
                           Icons.shopping_bag,
                           color: AppColors.darkColor,

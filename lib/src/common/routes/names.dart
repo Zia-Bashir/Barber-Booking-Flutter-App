@@ -7,4 +7,5 @@ class AppRoutes {
   static const SERVICES = '/services';
   static const SEARCH = '/search';
   static const DETAIL = '/detail';
+  static const CART = '/cart';
 }
