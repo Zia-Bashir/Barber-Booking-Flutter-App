@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
+import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/utils/app_sizes.dart';
 import 'package:the_barber/src/screens/app/services/components/components.dart';
@@ -70,29 +72,40 @@ class ServicesListStream extends StatelessWidget {
 
   //= ------------------ Service List Builder ------------------
 
-  Container servicesListBuilder(AsyncSnapshot<dynamic> snapshot, int index,
+  servicesListBuilder(AsyncSnapshot<dynamic> snapshot, int index,
       TextTheme style, BuildContext context) {
-    return Container(
-      height: 100,
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
-      margin: EdgeInsets.only(bottom: 20.h),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
-          color: AppColors.mainColor),
-      child: Stack(
-        children: [
-          //* ------------------ Services Price and Information ------------------
+    return GestureDetector(
+      onTap: () async {
+        controller.state.id = await snapshot.data.docs![index]['serviceId'];
+        String serviceTitle = snapshot.data.docs![index]['title'];
 
-          serviceDetails(snapshot, index, style),
+        Get.toNamed(AppRoutes.DETAIL, parameters: {
+          'id': controller.state.id.toString(),
+          'title': serviceTitle,
+        });
+      },
+      child: Container(
+        height: 110,
+        padding: EdgeInsets.only(left: 10.w, right: 10.w),
+        margin: EdgeInsets.only(bottom: 20.h),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.r),
+            color: AppColors.mainColor),
+        child: Stack(
+          children: [
+            //* ------------------ Services Price and Information ------------------
 
-          //* ------------------ Tag if it have ------------------
+            serviceDetails(snapshot, index, style),
 
-          serviceTag(context, snapshot, index, style),
+            //* ------------------ Tag if it have ------------------
 
-          //* ------------------ Discount % Tag if have ------------------
+            serviceTag(context, snapshot, index, style),
 
-          discountTag(snapshot, index, style),
-        ],
+            //* ------------------ Discount % Tag if have ------------------
+
+            discountTag(snapshot, index, style),
+          ],
+        ),
       ),
     );
   }

@@ -38,7 +38,7 @@ class DataUploaderController extends GetxController {
       //* ----- Services List Uploader
       for (var services in servicesList) {
         var content = ServicesListModel(
-          serviceId: services['id'],
+          serviceId: services['serviceId'],
           title: services['title'],
           description: services['description'],
           price: services['price'],

@@ -6,4 +6,5 @@ class AppRoutes {
   static const HOME = '/home';
   static const SERVICES = '/services';
   static const SEARCH = '/search';
+  static const DETAIL = '/detail';
 }
