@@ -16,3 +16,4 @@ const String washingImage = "assets/images/washing.svg";
 //? -------- Json -------
 
 const String loadingLottie = "assets/json/loading.json";
+const String emptyCartLottie = "assets/json/emptycart.json";

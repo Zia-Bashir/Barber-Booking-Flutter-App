@@ -121,6 +121,7 @@ class DetailScreen extends GetView<DetailController> {
                         style: Theme.of(context).elevatedButtonTheme.style,
                         onPressed: () async {
                           try {
+                            String docId = snapshot.data!.docs[0].id;
                             String serviceId =
                                 snapshot.data.docs![0]['serviceId'];
                             double servicePrice =
@@ -147,6 +148,7 @@ class DetailScreen extends GetView<DetailController> {
                             } else {
                               cartController.addedToCart(
                                   serviceId: serviceId,
+                                  docId: docId,
                                   servicePrice: servicePrice,
                                   discountPrice: discountPrice);
                               toastInfo(

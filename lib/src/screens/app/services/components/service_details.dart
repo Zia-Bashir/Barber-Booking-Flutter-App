@@ -105,6 +105,8 @@ Row serviceDetails(
       IconButton(
         onPressed: () async {
           try {
+            String docId = snapshot.data!.docs[index].id;
+
             String serviceId = snapshot.data.docs![index]['serviceId'];
             double servicePrice = snapshot.data.docs![index]['price'];
             double discountPrice = 0.0;
@@ -126,6 +128,7 @@ Row serviceDetails(
             } else {
               cartController.addedToCart(
                   serviceId: serviceId,
+                  docId: docId,
                   servicePrice: servicePrice,
                   discountPrice: discountPrice);
               toastInfo(

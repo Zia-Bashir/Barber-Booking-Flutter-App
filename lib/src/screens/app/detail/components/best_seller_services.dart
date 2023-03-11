@@ -165,6 +165,8 @@ class BestSellerServices extends StatelessWidget {
                                       child: GestureDetector(
                                         onTap: () async {
                                           try {
+                                            String docId =
+                                                snapshot.data!.docs[0].id;
                                             String serviceId = snapshot
                                                 .data.docs![0]['serviceId'];
                                             double servicePrice =
@@ -195,6 +197,7 @@ class BestSellerServices extends StatelessWidget {
                                             } else {
                                               cartController.addedToCart(
                                                   serviceId: serviceId,
+                                                  docId: docId,
                                                   servicePrice: servicePrice,
                                                   discountPrice: discountPrice);
                                               toastInfo(
