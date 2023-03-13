@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   badges: ^3.0.2
+  calendar_date_picker2: ^0.4.5
   cloud_firestore: ^4.1.0
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.1.4
@@ -47,12 +48,14 @@ dependencies:
   google_maps_flutter: ^2.2.3
   google_sign_in: ^5.4.4
   image_picker: ^0.8.6
+  intl: ^0.18.0
   location: ^4.4.0
   lottie: ^2.0.0
   permission_handler: ^10.2.0
   pinput: ^2.2.16
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
+  syncfusion_flutter_datepicker: ^20.4.53
 
 dev_dependencies:
   flutter_lints: ^2.0.0

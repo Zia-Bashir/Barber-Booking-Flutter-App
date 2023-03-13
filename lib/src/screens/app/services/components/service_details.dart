@@ -109,13 +109,8 @@ Row serviceDetails(
 
             String serviceId = snapshot.data.docs![index]['serviceId'];
             double servicePrice = snapshot.data.docs![index]['price'];
-            double discountPrice = 0.0;
-
-            //* ------------------ Check Discount Price ------------------
-
-            if (snapshot.data.docs![index]['discountedPrice'] != null) {
-              discountPrice = snapshot.data.docs![index]['discountedPrice'];
-            }
+            double discountPrice =
+                snapshot.data.docs![index]['discountedPrice'];
 
             //* ------------------ Check if service already Available  ------------------
 

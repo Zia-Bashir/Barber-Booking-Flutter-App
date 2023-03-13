@@ -13,3 +13,5 @@ final cartRF = firestore
     .collection("Cart")
     .doc(authCurrentUserMail)
     .collection("services");
+
+final appointmentRF = firestore.collection("Appointment");

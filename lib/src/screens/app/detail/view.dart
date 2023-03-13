@@ -126,15 +126,11 @@ class DetailScreen extends GetView<DetailController> {
                                 snapshot.data.docs![0]['serviceId'];
                             double servicePrice =
                                 snapshot.data.docs![0]['price'];
-                            double discountPrice = 0.0;
 
                             //* ------------------ Check Discount Price ------------------
 
-                            if (snapshot.data.docs![0]['discountedPrice'] !=
-                                null) {
-                              discountPrice =
-                                  snapshot.data.docs![0]['discountedPrice'];
-                            }
+                            double discountPrice =
+                                snapshot.data.docs![0]['discountedPrice'];
 
                             //* ------------------ Check if service already Available  ------------------
 

@@ -1,19 +1,26 @@
+import 'dart:convert';
+
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/Material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/widgets/widget.dart';
 import 'package:the_barber/src/screens/app/cart/index.dart';
+
+import '../../../common/utils/utils.dart';
 
 class CartController extends GetxController {
   final state = CartState();
   CartController();
 
   @override
-  void onReady() {
-    updateCartProductPrice();
+  void onInit() {
     getAmountAndDiscount();
-    super.onReady();
+    super.onInit();
   }
 
   //* ------------------ Add to Cart ------------------
@@ -28,9 +35,11 @@ class CartController extends GetxController {
       "serviceId": serviceId,
       "price": servicePrice,
       "docId": docId,
-      "discountPrice": 0.0
+      "discountPrice": discountPrice
     });
   }
+
+  //// - ====================================================================== -
 
   //* ------------------ Remove from Cart ------------------
 
@@ -43,6 +52,8 @@ class CartController extends GetxController {
       toastInfo(msg: "Error", backgroundColor: Colors.red);
     }
   }
+
+  //// - ====================================================================== -
 
   //* ------------------ Updated the Latest Price / Discount of Carted Services ------------------
 
@@ -66,54 +77,156 @@ class CartController extends GetxController {
     });
   }
 
+  //// - ====================================================================== -
+
+  //* ------------------ Get Total Amount and Discount ------------------
+
   getAmountAndDiscount() {
-    getTotalAmount();
-    getTotalDiscount();
-    getPriceAfterDiscount();
+    getTotalWithDiscount();
+    getTotalWithOutDiscount();
   }
 
-  //* ------------------ Total Amount of Cart Services  ------------------
+  //// - ====================================================================== -
 
-  Future<double> getTotalAmount() async {
+  //* ------------------ Total Amount with Discount of Cart Services  ------------------
+
+  Future<double> getTotalWithDiscount() async {
     QuerySnapshot snapshot = await cartRF.get();
     double totalPrice = 0.0;
+    double totalDiscount = 0.0;
     for (var i = 0; i < snapshot.docs.length; i++) {
       double price = snapshot.docs[i]['price'];
-      print("----------------$price");
-      totalPrice += price;
+      double discount = snapshot.docs[i]['discountPrice'];
+      if (discount > 0) {
+        totalDiscount = price - discount;
+      } else {
+        totalDiscount = 0.0;
+      }
+      totalPrice = totalPrice + (price - totalDiscount);
     }
     state.totalAmount.value = totalPrice;
-    print('Total Price: ${totalPrice.toString()}');
     return state.totalAmount.value;
   }
 
-  //* ------------------ Total Discount of Cart Services  ------------------
+  //// - ====================================================================== -
 
-  Future<double> getTotalDiscount() async {
-    QuerySnapshot snapshot = await cartRF.get();
-    double totalDiscount = 0.0;
-    for (var i = 0; i < snapshot.docs.length; i++) {
-      double discount = snapshot.docs[i]['discountPrice'];
-      print("----------------$discount");
-      totalDiscount += discount;
-    }
-    state.totalDiscount.value = totalDiscount;
-    print('Total Discount: ${totalDiscount.toString()}');
-    return state.totalDiscount.value;
-  }
+  //* ------------------ Total Amount withOut Discount of Cart Services  ------------------
 
-  Future<double> getPriceAfterDiscount() async {
+  Future<double> getTotalWithOutDiscount() async {
     QuerySnapshot snapshot = await cartRF.get();
-    double totalDiscount = 0.0;
-    double totalPrice = 0.0;
+    double totalAmount = 0.0;
     for (var i = 0; i < snapshot.docs.length; i++) {
       double price = snapshot.docs[i]['price'];
-      double discount = snapshot.docs[i]['discountPrice'];
-      totalPrice += price;
-      totalDiscount += discount;
+
+      totalAmount += price;
     }
-    //var actualDiscount = totalPrice - totalDiscount;
-    state.priceAfterDiscount.value = totalPrice - totalDiscount;
-    return state.priceAfterDiscount.value;
+    state.totalAmountWithOutDiscount.value = totalAmount;
+
+    return state.totalAmountWithOutDiscount.value;
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Select Date ------------------
+
+  selectDate(context, style) async {
+    //* ------------------ Date Picker ------------------
+
+    var results = await showCalendarDatePicker2Dialog(
+      context: context,
+      config: CalendarDatePicker2WithActionButtonsConfig(
+        calendarType: CalendarDatePicker2Type.single,
+        calendarViewMode: DatePickerMode.day,
+        closeDialogOnCancelTapped: true,
+        currentDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        closeDialogOnOkTapped: true,
+        selectedDayHighlightColor: AppColors.mainColor,
+        disableYearPicker: true,
+        controlsTextStyle:
+            TextStyle(color: AppColors.mainColor, fontSize: 15.sp),
+        weekdayLabelTextStyle: const TextStyle(color: AppColors.mainColor),
+        okButton: Text(
+          "OK",
+          style: style.subtitle1?.copyWith(color: AppColors.mainColor),
+        ),
+        cancelButton: Text(
+          "CANCLE",
+          style: style.subtitle1?.copyWith(color: AppColors.darkColor),
+        ),
+      ),
+      dialogSize: Size(325.w, 400.h),
+      dialogBackgroundColor: AppColors.secondryColor,
+      initialValue: [],
+      borderRadius: BorderRadius.circular(15),
+    );
+    String dateString = results![0].toString();
+
+    //= ------------------ Convert Data ------------------
+
+    convertDate(dateString);
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Convert Date ------------------
+
+  convertDate(String dateString) {
+    DateTime date = DateTime.parse(dateString);
+    state.formattedDate.value = DateFormat('yyyy-MM-dd').format(date);
+    return state.formattedDate.value;
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Select Time ------------------
+
+  selectTime(context) async {
+    var appointmentDoc =
+        await appointmentRF.doc(state.formattedDate.value).get();
+    if (appointmentDoc.exists) {
+      state.isDocAvailable.value = true;
+      // var appointmentSnapshot = await appointmentRF
+      //     .doc(state.formattedDate.value)
+      //     .collection('time')
+      //     .where('isBooked', isEqualTo: false)
+      //     .get();
+      // state.timeList.value = [];
+      // if (appointmentSnapshot.docs.isNotEmpty) {
+      //   for (var snapshot in appointmentSnapshot.docs) {
+      //     var appointmentData = snapshot.data();
+      //     var time = appointmentData["time"];
+      //     state.timeList.add([time]);
+      //   }
+      // }
+    } else {
+      state.isDocAvailable.value = false;
+      try {
+        var dataList = [];
+        String stringTime =
+            await rootBundle.loadString("assets/database/time.json");
+        dataList.add(jsonDecode(stringTime));
+        var timeList = dataList[0]['selectedTime'];
+        for (var time in timeList) {
+          await appointmentRF
+              .doc(state.formattedDate.value)
+              .collection("time")
+              .doc(time['id'])
+              .set({'time': time['time'], 'isBooked': time['isBooked']});
+        }
+        state.isDocAvailable.value = true;
+      } catch (e) {
+        state.isDocAvailable.value = false;
+        toastInfo(msg: "Error in Fetching Time", backgroundColor: Colors.red);
+      }
+    }
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Selected Time Slot ------------------
+
+  selectedTimeSlot(int index) {
+    state.selectedTimeSlot.value = index;
   }
 }
