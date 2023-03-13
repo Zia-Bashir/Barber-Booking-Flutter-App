@@ -182,44 +182,81 @@ class CartController extends GetxController {
   //* ------------------ Select Time ------------------
 
   selectTime(context) async {
-    var appointmentDoc =
-        await appointmentRF.doc(state.formattedDate.value).get();
-    if (appointmentDoc.exists) {
-      state.isDocAvailable.value = true;
-      // var appointmentSnapshot = await appointmentRF
-      //     .doc(state.formattedDate.value)
-      //     .collection('time')
-      //     .where('isBooked', isEqualTo: false)
-      //     .get();
-      // state.timeList.value = [];
-      // if (appointmentSnapshot.docs.isNotEmpty) {
-      //   for (var snapshot in appointmentSnapshot.docs) {
-      //     var appointmentData = snapshot.data();
-      //     var time = appointmentData["time"];
-      //     state.timeList.add([time]);
-      //   }
-      // }
-    } else {
-      state.isDocAvailable.value = false;
-      try {
-        var dataList = [];
-        String stringTime =
-            await rootBundle.loadString("assets/database/time.json");
-        dataList.add(jsonDecode(stringTime));
-        var timeList = dataList[0]['selectedTime'];
-        for (var time in timeList) {
-          await appointmentRF
-              .doc(state.formattedDate.value)
-              .collection("time")
-              .doc(time['id'])
-              .set({'time': time['time'], 'isBooked': time['isBooked']});
-        }
-        state.isDocAvailable.value = true;
-      } catch (e) {
+    state.selectedTimeSlot.value = 0;
+    await appointmentRF
+        .doc(state.formattedDate.value)
+        .collection('time')
+        .get()
+        .then((snapshot) async {
+      if (snapshot.docs.isEmpty && snapshot.size == 0) {
         state.isDocAvailable.value = false;
-        toastInfo(msg: "Error in Fetching Time", backgroundColor: Colors.red);
+        try {
+          var dataList = [];
+          String stringTime =
+              await rootBundle.loadString("assets/database/time.json");
+          dataList.add(jsonDecode(stringTime));
+          var timeList = dataList[0]['selectedTime'];
+          for (var time in timeList) {
+            await appointmentRF
+                .doc(state.formattedDate.value)
+                .collection("time")
+                .doc(time['id'])
+                .set({'time': time['time'], 'isBooked': time['isBooked']});
+          }
+          state.isDocAvailable.value = true;
+        } catch (e) {
+          state.isDocAvailable.value = false;
+          toastInfo(msg: "Error in Fetching Time", backgroundColor: Colors.red);
+        }
+      } else {
+        state.isDocAvailable.value = true;
       }
-    }
+    });
+
+    //// - ====================================================================== -
+
+    // var appointmentDoc =
+    //     await appointmentRF.doc(state.formattedDate.value).get();
+    // if (appointmentDoc.exists && appointmentDoc.data() != null) {
+    //   state.isDocAvailable.value = true;
+
+    //   print('-------------------------------------------Available');
+
+    //   var appointmentSnapshot = await appointmentRF
+    //       .doc(state.formattedDate.value)
+    //       .collection('time')
+    //       .where('isBooked', isEqualTo: false)
+    //       .get();
+    //   state.timeList.value = [];
+    //   if (appointmentSnapshot.docs.isNotEmpty) {
+    //     for (var snapshot in appointmentSnapshot.docs) {
+    //       var appointmentData = snapshot.data();
+    //       var time = appointmentData["time"];
+    //       state.timeList.add([time]);
+    //     }
+    //   }
+    // } else {
+    //   print('-------------------------------------------Not Available');
+    //   state.isDocAvailable.value = false;
+    //   try {
+    //     var dataList = [];
+    //     String stringTime =
+    //         await rootBundle.loadString("assets/database/time.json");
+    //     dataList.add(jsonDecode(stringTime));
+    //     var timeList = dataList[0]['selectedTime'];
+    //     for (var time in timeList) {
+    //       await appointmentRF
+    //           .doc(state.formattedDate.value)
+    //           .collection("time")
+    //           .doc(time['id'])
+    //           .set({'time': time['time'], 'isBooked': time['isBooked']});
+    //     }
+    //     state.isDocAvailable.value = true;
+    //   } catch (e) {
+    //     state.isDocAvailable.value = false;
+    //     toastInfo(msg: "Error in Fetching Time", backgroundColor: Colors.red);
+    //   }
+    // }
   }
 
   //// - ====================================================================== -
@@ -228,5 +265,75 @@ class CartController extends GetxController {
 
   selectedTimeSlot(int index) {
     state.selectedTimeSlot.value = index;
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Book Appointment ------------------
+  bookappointment() async {
+    try {
+      if (state.formattedDate.value == '' && state.slectedTime.value == '') {
+        toastInfo(
+          msg: "Please select date and time",
+          backgroundColor: AppColors.darkColor,
+        );
+      } else if (state.slectedTime.value == '') {
+        toastInfo(
+          msg: "Please select time slot",
+          backgroundColor: AppColors.darkColor,
+        );
+      }
+      if (state.formattedDate.value != '' && state.slectedTime.value != '') {
+        DateTime dateTime = DateTime.parse(state.formattedDate.value);
+        String outputDate = DateFormat("yyyy-MMMM-dd").format(dateTime);
+        String docId = outputDate + state.slectedTime.value;
+        await bookingRF.doc(docId).set({
+          "docId": docId,
+          "mail": authCurrentUserMail,
+          "name": authCurrentUserName,
+          "date": outputDate.toString(),
+          "timeSlot": state.slectedTime.value.toString(),
+          "price": state.totalAmount.value.toString(),
+          "status": "booked",
+        });
+        toastInfo(
+          msg: "Appointment Booked",
+          backgroundColor: AppColors.darkColor,
+        );
+
+        //* ------------------ Time Slot Booking (True) ------------------
+        await appointmentRF
+            .doc(state.formattedDate.value)
+            .collection("time")
+            .doc(state.selectedTimeDocId.value.toString())
+            .update({
+          "isBooked": true,
+        });
+        state.selectedTimeDocId.value = "";
+        state.slectedTime.value = "";
+
+        //* ------------------ Clear the Cart ------------------
+
+        clearCart();
+      }
+    } catch (e) {
+      toastInfo(
+        msg: "Error in Booking Appointment",
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Clear the Cart ------------------
+  clearCart() async {
+    await cartRF.get().then((snapshot) {
+      WriteBatch batch = FirebaseFirestore.instance.batch();
+      for (var doc in snapshot.docs) {
+        batch.delete(doc.reference);
+      }
+      batch.commit().then((value) => print('All documents deleted'));
+    }).catchError((error) => print('Failed to delete documents: $error'));
   }
 }

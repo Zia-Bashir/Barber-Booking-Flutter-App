@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/common/widgets/mytext_widget.dart';
@@ -66,8 +67,8 @@ class BookYourAppointment extends StatelessWidget {
                   Text(
                     "------->",
                     style: style.subtitle2?.copyWith(
-                        color: Colors.white,
-                        decoration: TextDecoration.lineThrough),
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     "Total Price",
@@ -131,12 +132,21 @@ class BookYourAppointment extends StatelessWidget {
             ],
           ),
           const Spacer(),
+
+          //* ------------------ Book Your Appointment Button ------------------
+
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.showOverlay(
+                        loadingWidget: const Loading(),
+                        asyncFunction: () {
+                          return controller.bookappointment();
+                        });
+                  },
                   icon: const Icon(
                     Icons.date_range_rounded,
                     color: AppColors.secondryColor,
@@ -203,123 +213,140 @@ class BookYourAppointment extends StatelessWidget {
                     ),
                     //* ------------------ Appointment Stream Builder ------------------
 
-                    StreamBuilder(
-                      stream: appointmentRF
-                          .doc(date)
-                          .collection('time')
-                          .where('isBooked', isEqualTo: false)
-                          .snapshots(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (!snapshot.hasData) {
-                          return const CircularProgressIndicator(
-                            color: AppColors.mainColor,
-                          );
-                        } else {
-                          if (snapshot.data.docs.length == 0) {
-                            return Expanded(
-                              child: Center(
-                                child: Text(
-                                  "No Slot Available",
-                                  style: style.headline6?.copyWith(
+                    Obx(
+                      () => controller.state.isDocAvailable.value == false
+                          ? const CircularProgressIndicator(
+                              color: AppColors.mainColor,
+                            )
+                          : StreamBuilder(
+                              stream: appointmentRF
+                                  .doc(date)
+                                  .collection('time')
+                                  .where('isBooked', isEqualTo: false)
+                                  .snapshots(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const CircularProgressIndicator(
                                     color: AppColors.mainColor,
-                                  ),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Available Slot",
-                                      style: style.headline6?.copyWith(
-                                        color: AppColors.mainColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 30.h,
-                                ),
-                                SizedBox(
-                                  height: 220.h,
-                                  child: GridView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 4,
-                                            childAspectRatio: 2.5,
-                                            crossAxisSpacing: 20,
-                                            mainAxisSpacing: 20),
-                                    itemCount: snapshot.data.docs.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      //* ------------------ Time Slot Grid ------------------
-
-                                      return GestureDetector(
-                                        onTap: () {
-                                          controller.selectedTimeSlot(index);
-                                          controller.state.selectedTimeDocId
-                                              .value = "";
-                                          controller.state.slectedTime.value =
-                                              "";
-                                          controller.state.selectedTimeDocId
-                                                  .value =
-                                              snapshot
-                                                  .data
-                                                  .docs[controller.state
-                                                      .selectedTimeSlot.value]
-                                                  .id;
-                                          controller.state.slectedTime.value =
-                                              snapshot.data.docs[controller
-                                                  .state
-                                                  .selectedTimeSlot
-                                                  .value]['time'];
-                                        },
-                                        child: Obx(
-                                          () => Container(
-                                            decoration: BoxDecoration(
-                                              color: controller
-                                                          .state
-                                                          .selectedTimeSlot
-                                                          .value ==
-                                                      index
-                                                  ? AppColors.mainColor
-                                                  : AppColors.darkColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10.r),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                snapshot.data.docs![index]
-                                                    ['time'],
-                                                style:
-                                                    style.subtitle2?.copyWith(
-                                                  color: controller
-                                                              .state
-                                                              .selectedTimeSlot
-                                                              .value ==
-                                                          index
-                                                      ? AppColors.darkColor
-                                                      : AppColors.mainColor,
-                                                ),
-                                              ),
-                                            ),
+                                  );
+                                } else {
+                                  if (snapshot.data.docs.length == 0) {
+                                    return Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          "No Slot Available",
+                                          style: style.headline6?.copyWith(
+                                            color: AppColors.mainColor,
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            );
-                          }
-                        }
-                      },
+                                      ),
+                                    );
+                                  } else {
+                                    return Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Available Slot",
+                                              style: style.headline6?.copyWith(
+                                                color: AppColors.mainColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 30.h,
+                                        ),
+                                        SizedBox(
+                                          height: 220.h,
+                                          child: GridView.builder(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const AlwaysScrollableScrollPhysics(),
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 4,
+                                                    childAspectRatio: 2.5,
+                                                    crossAxisSpacing: 20,
+                                                    mainAxisSpacing: 20),
+                                            itemCount:
+                                                snapshot.data.docs.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              //* ------------------ Time Slot Grid ------------------
+
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  controller
+                                                      .selectedTimeSlot(index);
+
+                                                  controller
+                                                          .state
+                                                          .selectedTimeDocId
+                                                          .value =
+                                                      snapshot
+                                                          .data
+                                                          .docs[controller
+                                                              .state
+                                                              .selectedTimeSlot
+                                                              .value]
+                                                          .id;
+                                                  controller.state.slectedTime
+                                                          .value =
+                                                      snapshot.data.docs[
+                                                          controller
+                                                              .state
+                                                              .selectedTimeSlot
+                                                              .value]['time'];
+                                                },
+                                                child: Obx(
+                                                  () => Container(
+                                                    decoration: BoxDecoration(
+                                                      color: controller
+                                                                  .state
+                                                                  .selectedTimeSlot
+                                                                  .value ==
+                                                              index
+                                                          ? AppColors.mainColor
+                                                          : AppColors.darkColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.r),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        snapshot.data
+                                                                .docs![index]
+                                                            ['time'],
+                                                        style: style.subtitle2
+                                                            ?.copyWith(
+                                                          color: controller
+                                                                      .state
+                                                                      .selectedTimeSlot
+                                                                      .value ==
+                                                                  index
+                                                              ? AppColors
+                                                                  .darkColor
+                                                              : AppColors
+                                                                  .mainColor,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                }
+                              },
+                            ),
                     ),
                   ],
                 ),
