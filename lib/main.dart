@@ -6,8 +6,13 @@ import 'package:the_barber/firebase_options.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/common/services/storage.dart';
 import 'package:the_barber/src/common/theme/theme_index.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import './src/common/helper/dependicies.dart' as dep;
+import './src/common/firebase/fcm_services.dart' as fcm;
+
+FlutterLocalNotificationsPlugin notificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +22,11 @@ void main() async {
   //? --- Getx Dependecy Injection ---
   dep.initState();
 
+  //* --- FCM Services ---
+  fcm.initState();
+
   //* --- Storage Services ---
   StorageServices.to.init();
-
   runApp(const MyApp());
 }
 

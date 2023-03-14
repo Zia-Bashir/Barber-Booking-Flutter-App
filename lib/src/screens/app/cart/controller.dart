@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:the_barber/src/common/firebase/fcm_services.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/widgets/widget.dart';
 import 'package:the_barber/src/screens/app/cart/index.dart';
@@ -15,6 +16,7 @@ import '../../../common/utils/utils.dart';
 
 class CartController extends GetxController {
   final state = CartState();
+  var fcmServices = FcmServices();
   CartController();
 
   @override
@@ -173,7 +175,7 @@ class CartController extends GetxController {
 
   convertDate(String dateString) {
     DateTime date = DateTime.parse(dateString);
-    state.formattedDate.value = DateFormat('yyyy-MM-dd').format(date);
+    state.formattedDate.value = DateFormat('MMMM d yyyy').format(date);
     return state.formattedDate.value;
   }
 
@@ -284,14 +286,14 @@ class CartController extends GetxController {
         );
       }
       if (state.formattedDate.value != '' && state.slectedTime.value != '') {
-        DateTime dateTime = DateTime.parse(state.formattedDate.value);
-        String outputDate = DateFormat("yyyy-MMMM-dd").format(dateTime);
-        String docId = outputDate + state.slectedTime.value;
+        // DateTime dateTime = DateTime.parse(state.formattedDate.value);
+        // String outputDate = DateFormat("yyyy-MMMM-dd").format(dateTime);
+        String docId = state.formattedDate.value + state.slectedTime.value;
         await bookingRF.doc(docId).set({
           "docId": docId,
           "mail": authCurrentUserMail,
           "name": authCurrentUserName,
-          "date": outputDate.toString(),
+          "date": state.formattedDate.value.toString(),
           "timeSlot": state.slectedTime.value.toString(),
           "price": state.totalAmount.value.toString(),
           "status": "booked",
@@ -309,12 +311,14 @@ class CartController extends GetxController {
             .update({
           "isBooked": true,
         });
-        state.selectedTimeDocId.value = "";
-        state.slectedTime.value = "";
 
         //* ------------------ Clear the Cart ------------------
 
         clearCart();
+        notification(state.slectedTime.value.toString(),
+            state.formattedDate.value.toString());
+        state.selectedTimeDocId.value = "";
+        state.slectedTime.value = "";
       }
     } catch (e) {
       toastInfo(
@@ -322,6 +326,18 @@ class CartController extends GetxController {
         backgroundColor: Colors.red,
       );
     }
+  }
+
+  //* ------------------ Notification ------------------
+
+  notification(
+    String slotTime,
+    String date,
+  ) {
+    fcmServices.displyNotification(
+        title: "Appointment Booked",
+        body:
+            "Your ${slotTime.toString()} slot on ${date.toString()} is Booked");
   }
 
   //// - ====================================================================== -

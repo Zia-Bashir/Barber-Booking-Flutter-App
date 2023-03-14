@@ -2,67 +2,67 @@
     "selectedTime":[
         {
           "id":"t001",
-          "time":"10AM",
+          "time":"10 AM",
           "isBooked":false
         },
         {
           "id":"t002",
-            "time":"11AM",
+            "time":"11 AM",
             "isBooked":false
           },
           {
             "id":"t003",
-            "time":"12PM",
+            "time":"12 PM",
             "isBooked":false
           },
           {
             "id":"t004",
-            "time":"01PM",
+            "time":"01 PM",
             "isBooked":false
           },
           {
             "id":"t005",
-            "time":"02PM",
+            "time":"02 PM",
             "isBooked":false
           },
           {
             "id":"t006",
-            "time":"03PM",
+            "time":"03 PM",
             "isBooked":false
           },
           {
             "id":"t007",
-            "time":"04PM",
+            "time":"04 PM",
             "isBooked":false
           },
           {
             "id":"t008",
-            "time":"05PM",
+            "time":"05 PM",
             "isBooked":false
           },
           {
             "id":"t009",
-            "time":"06PM",
+            "time":"06 PM",
             "isBooked":false
           },
           {
             "id":"t010",
-            "time":"07PM",
+            "time":"07 PM",
             "isBooked":false
           },
           {
             "id":"t011",
-            "time":"08PM",
+            "time":"08 PM",
             "isBooked":false
           },
           {
             "id":"t012",
-            "time":"09PM",
+            "time":"09 PM",
             "isBooked":false
           },
           {
             "id":"t013",
-            "time":"10PM",
+            "time":"10 PM",
             "isBooked":false
           }
 
