@@ -5,20 +5,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../../../main.dart';
 
-@override
-Future<void> initState() async {
-  var fcmServices = FcmServices();
-  fcmServices.notificationInit();
-}
-
 //todo ------------------ FCM Services Class ------------------
 
 class FcmServices {
-  var fcmServerKey = '';
+  static var fcmServerKey = '';
 
   //* ------------------ Generate FCM Device Token ------------------
 
-  generateFCMDeviceToken() async {
+  static generateFCMDeviceToken() async {
     FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
     String? deviceToken = await firebaseMessaging.getToken();
 
@@ -27,7 +21,7 @@ class FcmServices {
 
   //* ------------------ Notification Initiliazed ------------------
 
-  notificationInit() async {
+  static notificationInit() async {
     //= ------------------ Inintialized Android and iOS settings ------------------
 
     AndroidInitializationSettings androidSettings =
@@ -51,25 +45,14 @@ class FcmServices {
 
   //// - ====================================================================== -
 
-  // listen background FCM
-
-  listenbackgroundFCM(RemoteMessage message) {
-    print("FCM background message");
-
-    var title = message.notification!.title;
-    var body = message.notification!.body;
-    displyNotification(title: title.toString(), body: body.toString());
-  }
-
-  //* ------------------ Local Notifications for Android and iOS ------------------
-
   //* ------------------ Display Local Notification ------------------
 
-  displyNotification({required String title, required String body}) async {
+  static displyNotification(
+      {required String title, required String body}) async {
     AndroidNotificationDetails androidNotificationDetails =
         const AndroidNotificationDetails(
-      "test",
-      "test",
+      "thebarberapp",
+      "thebarberappchannel",
       playSound: true,
       priority: Priority.high,
       importance: Importance.high,
@@ -92,6 +75,73 @@ class FcmServices {
         android: androidNotificationDetails,
         iOS: iosNotificationDetails,
       ),
+    );
+  }
+  //// - ====================================================================== -
+
+  //* ------------------ Terminate State Notification ------------------
+
+  static terminateNotification() {
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        print("FirebaseMessaging.instance.getInitialMessage");
+
+        if (message != null) {
+          var title = message.notification!.title;
+          var body = message.notification!.body;
+          displyNotification(title: title!, body: body!);
+          print("New Notification");
+          // if (message.data['_id'] != null) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => DemoScreen(
+          //         id: message.data['_id'],
+          //       ),
+          //     ),
+          //   );
+          // }
+        }
+      },
+    );
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Foreground Notification ------------------
+
+  static foregroundNotification() {
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          if (message.notification != null) {
+            var title = message.notification!.title;
+            var body = message.notification!.body;
+            displyNotification(title: title!, body: body!);
+
+            print("message.data22 ${message.data['_id']}");
+          }
+        }
+      },
+    );
+  }
+
+  //// - ====================================================================== -
+
+  //* ------------------ Background Notification ------------------
+
+  static backgroundNotification() {
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          var title = message.notification!.title;
+          var body = message.notification!.body;
+          displyNotification(title: title!, body: body!);
+
+          print("message.data22 ${message.data['_id']}");
+        }
+      },
     );
   }
 }

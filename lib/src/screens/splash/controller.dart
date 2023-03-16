@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/firebase/fcm_services.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
@@ -8,15 +10,12 @@ import '../../common/services/storage.dart';
 
 class SplashController extends GetxController {
   final state = SplashState();
-  FcmServices fcmServices = FcmServices();
+
   SplashController();
   @override
   Future<void> onInit() async {
-    state.deviceToken.value = await fcmServices.generateFCMDeviceToken();
-
-    print(
-        '---------------Device Token ----- ${state.deviceToken.value.toString()}');
-
+    state.deviceToken.value = await FcmServices.generateFCMDeviceToken();
+    log("Device Token---------:${state.deviceToken.value.toString()}");
     super.onInit();
   }
 

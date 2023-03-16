@@ -16,7 +16,6 @@ import '../../../common/utils/utils.dart';
 
 class CartController extends GetxController {
   final state = CartState();
-  var fcmServices = FcmServices();
   CartController();
 
   @override
@@ -334,7 +333,7 @@ class CartController extends GetxController {
     String slotTime,
     String date,
   ) {
-    fcmServices.displyNotification(
+    FcmServices.displyNotification(
         title: "Appointment Booked",
         body:
             "Your ${slotTime.toString()} slot on ${date.toString()} is Booked");
