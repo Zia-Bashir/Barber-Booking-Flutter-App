@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 
-class AnimatedCartTitle extends StatelessWidget {
-  const AnimatedCartTitle({
+class AnimatedTitle extends StatelessWidget {
+  const AnimatedTitle({
     Key? key,
     required this.style,
+    required this.title,
   }) : super(key: key);
 
   final TextTheme style;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class AnimatedCartTitle extends StatelessWidget {
           children: [
             //* ------------------ Cart Text ------------------
             Text(
-              "Cart",
+              title,
               style: style.headline3?.copyWith(color: AppColors.mainColor),
             ),
             Padding(

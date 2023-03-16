@@ -7,3 +7,4 @@ export './animated_title_with_bar_widget.dart';
 export './build_app_bar.dart';
 export './textfiled_widget.dart';
 export './cart_button.dart';
+export './animated_title.dart';

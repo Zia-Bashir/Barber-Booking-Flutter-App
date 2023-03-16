@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/screens/app/cart/index.dart';
 import 'package:the_barber/src/screens/app/detail/index.dart';
+import 'package:the_barber/src/screens/app/history/index.dart';
 import 'package:the_barber/src/screens/app/home/index.dart';
 import 'package:the_barber/src/screens/app/search/index.dart';
 import 'package:the_barber/src/screens/app/services/index.dart';
@@ -57,6 +58,13 @@ class AppPages {
       name: AppRoutes.CART,
       page: () => const CartScreen(),
       binding: CartBinding(),
+    ),
+
+    //= -- History Route
+    GetPage(
+      name: AppRoutes.HISTORY,
+      page: () => const HistoryScreen(),
+      binding: HistoryBinding(),
     ),
   ];
 }

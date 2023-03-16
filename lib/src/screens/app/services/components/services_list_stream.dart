@@ -26,14 +26,11 @@ class ServicesListStream extends StatelessWidget {
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData) {
-          return SizedBox(
-            width: screenWidth,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Loading(),
-              ],
+          return const Center(
+            child: SizedBox(
+              width: 30,
+              height: 30,
+              child: CircularProgressIndicator(color: AppColors.mainColor),
             ),
           );
         } else {

@@ -317,8 +317,9 @@ class CartController extends GetxController {
           "services": servicesList,
           "date": state.formattedDate.value.toString(),
           "timeSlot": state.slectedTime.value.toString(),
-          "price": state.totalAmount.value.toString(),
+          "price": state.totalAmount.value.toStringAsFixed(2),
           "status": "booked",
+          "bookingTime": Timestamp.now()
         });
         toastInfo(
           msg: "Appointment Booked",

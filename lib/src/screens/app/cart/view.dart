@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
+import 'package:the_barber/src/common/routes/names.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/screens/app/cart/components/components.dart';
 import 'package:the_barber/src/screens/app/cart/controller.dart';
@@ -43,10 +44,15 @@ class CartScreen extends GetView<CartController> {
 
                         //= ------------------ Animated Title ------------------
 
-                        AnimatedCartTitle(style: style),
-                        const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.transparent,
+                        AnimatedTitle(style: style, title: "Cart"),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.HISTORY);
+                          },
+                          child: const Icon(
+                            Icons.history,
+                            color: AppColors.darkColor,
+                          ),
                         ),
                       ],
                     ),

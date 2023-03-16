@@ -8,4 +8,5 @@ class AppRoutes {
   static const SEARCH = '/search';
   static const DETAIL = '/detail';
   static const CART = '/cart';
+  static const HISTORY = '/history';
 }
