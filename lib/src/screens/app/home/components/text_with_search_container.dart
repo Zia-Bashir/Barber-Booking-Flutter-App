@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/routes/names.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/utils/app_sizes.dart';
@@ -40,9 +41,33 @@ class TextWithSearchContainer extends StatelessWidget {
                   style: style.headline2?.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w200),
                 ),
-                Text(
-                  "Zia Bashir",
-                  style: style.headline1,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: StreamBuilder(
+                    stream: userRF
+                        .where("email", isEqualTo: authCurrentUserMail)
+                        .snapshots(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text(
+                          "User",
+                          style: style.headline1,
+                        );
+                      } else {
+                        return snapshot.data.docs![0]['name'] == ''
+                            ? Text(
+                                "User",
+                                style: style.headline1,
+                              )
+                            : Text(
+                                snapshot.data.docs![0]['name'],
+                                style: style.headline1,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              );
+                      }
+                    },
+                  ),
                 ),
               ]),
         ),

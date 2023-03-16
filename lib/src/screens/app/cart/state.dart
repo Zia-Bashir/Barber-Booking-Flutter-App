@@ -11,4 +11,5 @@ class CartState {
   var isDocAvailable = false.obs;
   var selectedTimeSlot = 0.obs;
   var selectedTimeDocId = ''.obs;
+  var cartBookingList = [].obs;
 }

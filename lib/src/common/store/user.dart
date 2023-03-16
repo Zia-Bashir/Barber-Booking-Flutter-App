@@ -33,12 +33,14 @@ class UserStore extends GetxController {
     token = value;
   }
 
-  // 获取 profile
+  Future<String> getToken() async {
+    if (token.isEmpty) return "";
+    return StorageServices.to.getString(STORAGE_USER_TOKEN_KEY);
+  }
+
+  // profile
   Future<String> getProfile() async {
     if (token.isEmpty) return "";
-    // var result = await UserAPI.profile();
-    // _profile(result);
-    // _isLogin.value = true;
     return StorageServices.to.getString(STORAGE_USER_PROFILE_KEY);
   }
 

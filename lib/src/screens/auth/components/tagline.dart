@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -32,8 +33,6 @@ class TaglLine extends StatelessWidget {
                     ),
                   ),
               children: [
-                smallDivider(),
-
                 //= ------------------ Animation 2.1.1 ------------------
                 Column(
                   children: AnimationConfiguration.toStaggeredList(
@@ -53,10 +52,17 @@ class TaglLine extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              tAuthRichText,
-                              style: style.headline3
-                                  ?.copyWith(color: AppColors.mainColor),
+                            DefaultTextStyle(
+                              style: Theme.of(context).textTheme.headline3!,
+                              child: AnimatedTextKit(
+                                animatedTexts: [
+                                  RotateAnimatedText(tAuthRichText),
+                                  RotateAnimatedText(tAuthRichText2),
+                                  RotateAnimatedText(tAuthRichText3),
+                                  RotateAnimatedText(tAuthRichText4),
+                                ],
+                                repeatForever: true,
+                              ),
                             ),
                             SizedBox(
                               height: 5.h,

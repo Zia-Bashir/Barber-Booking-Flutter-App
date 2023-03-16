@@ -17,6 +17,7 @@ class AppTextTheme {
         color: AppColors.mainColor),
     headline3: GoogleFonts.archivo(
       fontSize: 21.sp,
+      color: AppColors.mainColor,
       fontWeight: FontWeight.w600,
     ),
     headline4: GoogleFonts.archivo(

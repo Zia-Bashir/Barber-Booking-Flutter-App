@@ -13,6 +13,7 @@ class ServicesScreen extends GetView<ServicesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.secondryColor,
       appBar: buildAppBar(context, controller),
       body: Column(

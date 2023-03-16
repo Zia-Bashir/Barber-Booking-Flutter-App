@@ -169,6 +169,8 @@ class BestSellerServices extends StatelessWidget {
                                                 snapshot.data!.docs[0].id;
                                             String serviceId = snapshot
                                                 .data.docs![0]['serviceId'];
+                                            String serviceTitle =
+                                                snapshot.data.docs![0]['title'];
                                             double servicePrice =
                                                 snapshot.data.docs![0]['price'];
 
@@ -192,6 +194,7 @@ class BestSellerServices extends StatelessWidget {
                                             } else {
                                               cartController.addedToCart(
                                                   serviceId: serviceId,
+                                                  serviceTitle: serviceTitle,
                                                   docId: docId,
                                                   servicePrice: servicePrice,
                                                   discountPrice: discountPrice);

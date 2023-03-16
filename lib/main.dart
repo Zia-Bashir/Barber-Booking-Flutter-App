@@ -38,6 +38,7 @@ void main() async {
 
   //* --- Storage Services ---
   StorageServices.to.init();
+
   runApp(const MyApp());
 }
 

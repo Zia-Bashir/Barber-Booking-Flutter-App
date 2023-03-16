@@ -6,3 +6,4 @@ const String STORAGE_DEVICE_FIRST_OPEN_KEY = 'device_first_open';
 const String STORAGE_INDEX_NEWS_CACHE_KEY = 'cache_index_news';
 const String STORAGE_LANGUAGE_CODE = 'language_code';
 const String LOGIN_STATE = "login_state";
+const String STORAGE_FCM_TOKEN_KEY = 'fcm_token';

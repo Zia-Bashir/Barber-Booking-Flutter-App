@@ -17,6 +17,7 @@ class DetailScreen extends GetView<DetailController> {
     var style = Theme.of(context).textTheme;
     var cartController = CartController();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.secondryColor,
       appBar: detailAppBar(context, controller),
       body: Padding(
@@ -124,6 +125,8 @@ class DetailScreen extends GetView<DetailController> {
                             String docId = snapshot.data!.docs[0].id;
                             String serviceId =
                                 snapshot.data.docs![0]['serviceId'];
+                            String serviceTitle =
+                                snapshot.data.docs![0]['title'];
                             double servicePrice =
                                 snapshot.data.docs![0]['price'];
 
@@ -145,6 +148,7 @@ class DetailScreen extends GetView<DetailController> {
                               cartController.addedToCart(
                                   serviceId: serviceId,
                                   docId: docId,
+                                  serviceTitle: serviceTitle,
                                   servicePrice: servicePrice,
                                   discountPrice: discountPrice);
                               toastInfo(

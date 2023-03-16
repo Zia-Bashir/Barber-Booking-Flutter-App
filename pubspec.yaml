@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_text_kit: ^4.2.2
   badges: ^3.0.2
   calendar_date_picker2: ^0.4.5
   cloud_firestore: ^4.1.0

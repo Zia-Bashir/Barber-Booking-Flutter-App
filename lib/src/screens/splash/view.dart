@@ -14,6 +14,7 @@ class SplashScreen extends GetView<SplashController> {
     //var style = Theme.of(context).textTheme;
     controller.startAnimation();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.secondryColor,
       body: Stack(
         children: [

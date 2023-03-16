@@ -109,6 +109,7 @@ Row serviceDetails(
 
             String serviceId = snapshot.data.docs![index]['serviceId'];
             double servicePrice = snapshot.data.docs![index]['price'];
+            String serviceTitle = snapshot.data.docs![index]['title'];
             double discountPrice =
                 snapshot.data.docs![index]['discountedPrice'];
 
@@ -124,6 +125,7 @@ Row serviceDetails(
               cartController.addedToCart(
                   serviceId: serviceId,
                   docId: docId,
+                  serviceTitle: serviceTitle,
                   servicePrice: servicePrice,
                   discountPrice: discountPrice);
               toastInfo(

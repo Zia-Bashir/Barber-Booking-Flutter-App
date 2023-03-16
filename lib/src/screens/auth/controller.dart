@@ -60,6 +60,7 @@ class AuthController extends GetxController {
 
         //* --- Store UserProfile in Local Storage ----
         UserStore.to.saveProfile(userProfile);
+        var fcmToken = StorageServices.to.getString(STORAGE_FCM_TOKEN_KEY);
 
         //* --- Check if user firebase is exist or not ----
         var userBase = await userRF
@@ -78,7 +79,7 @@ class AuthController extends GetxController {
             email: email,
             photourl: photoUrl,
             location: '',
-            fcmtoken: '',
+            fcmtoken: fcmToken,
             addtime: Timestamp.now(),
             completeProfile: false,
             phoneNumber: '',

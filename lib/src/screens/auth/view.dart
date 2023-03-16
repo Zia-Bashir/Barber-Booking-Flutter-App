@@ -18,6 +18,7 @@ class AuthScreen extends GetView<AuthController> {
     var size = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.secondryColor,
       body: SizedBox(
         width: screenWidth,

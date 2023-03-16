@@ -15,6 +15,8 @@ class SplashController extends GetxController {
   @override
   Future<void> onInit() async {
     state.deviceToken.value = await FcmServices.generateFCMDeviceToken();
+    StorageServices.to
+        .setString(STORAGE_FCM_TOKEN_KEY, state.deviceToken.value.toString());
     log("Device Token---------:${state.deviceToken.value.toString()}");
     super.onInit();
   }

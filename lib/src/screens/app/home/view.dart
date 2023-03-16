@@ -12,6 +12,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     var style = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.secondryColor,
       body: SafeArea(
         child: Padding(

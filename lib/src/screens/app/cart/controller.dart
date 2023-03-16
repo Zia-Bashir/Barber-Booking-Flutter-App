@@ -30,10 +30,12 @@ class CartController extends GetxController {
       {required String serviceId,
       required double servicePrice,
       required String docId,
+      required String serviceTitle,
       required double discountPrice}) {
     return cartRF.doc(docId).set({
       "uid": authCurrentUserMail,
       "serviceId": serviceId,
+      "title": serviceTitle,
       "price": servicePrice,
       "docId": docId,
       "discountPrice": discountPrice
@@ -267,11 +269,11 @@ class CartController extends GetxController {
   selectedTimeSlot(int index) {
     state.selectedTimeSlot.value = index;
   }
-
   //// - ====================================================================== -
 
   //* ------------------ Book Appointment ------------------
   bookappointment() async {
+    final servicesList = [];
     try {
       if (state.formattedDate.value == '' && state.slectedTime.value == '') {
         toastInfo(
@@ -284,14 +286,35 @@ class CartController extends GetxController {
           backgroundColor: AppColors.darkColor,
         );
       }
+
+      //* ------------------ Getting Cart Services Details ------------------
+
       if (state.formattedDate.value != '' && state.slectedTime.value != '') {
-        // DateTime dateTime = DateTime.parse(state.formattedDate.value);
-        // String outputDate = DateFormat("yyyy-MMMM-dd").format(dateTime);
         String docId = state.formattedDate.value + state.slectedTime.value;
+        await cartRF.get().then((snapshot) async {
+          if (snapshot.docs.isNotEmpty) {
+            for (var i = 0; i < snapshot.docs.length; i++) {
+              String docId = snapshot.docs[i]['docId'];
+              String serviceTitle = snapshot.docs[i]['title'];
+              double servicePrice = snapshot.docs[i]['price'];
+              double serviceDiscount = snapshot.docs[i]['discountPrice'];
+              servicesList.add({
+                'docID': docId,
+                'title': serviceTitle,
+                'price': servicePrice,
+                'Discount': serviceDiscount,
+              });
+            }
+
+            print(
+                'Service List -------------- ----- ${servicesList.toString()}');
+          }
+        });
         await bookingRF.doc(docId).set({
           "docId": docId,
           "mail": authCurrentUserMail,
           "name": authCurrentUserName,
+          "services": servicesList,
           "date": state.formattedDate.value.toString(),
           "timeSlot": state.slectedTime.value.toString(),
           "price": state.totalAmount.value.toString(),
