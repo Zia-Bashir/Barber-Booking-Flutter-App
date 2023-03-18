@@ -26,9 +26,8 @@ class UserData {
   });
 
   factory UserData.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options) {
     final data = snapshot.data();
     return UserData(
       id: data?['id'],

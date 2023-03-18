@@ -41,10 +41,12 @@ dependencies:
   flashy_tab_bar2: ^0.0.5
   flutter:
     sdk: flutter
+  flutter_cache_manager: ^3.3.0
   flutter_local_notifications: ^13.0.0
   flutter_screenutil: ^5.6.0
   flutter_staggered_animations: ^1.1.1
   flutter_svg: ^1.1.6
+  flutter_zoom_drawer: ^3.0.4+1
   fluttertoast: ^8.1.2
   get: ^4.6.5
   google_fonts: ^3.0.1
@@ -61,10 +63,10 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.4.53
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.12.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.12.0
 
 flutter_icons:
   android: true

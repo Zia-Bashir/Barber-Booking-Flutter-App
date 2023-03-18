@@ -29,4 +29,10 @@ class HomeController extends GetxController {
       }
     });
   }
+
+  void toggleDrawer() {
+    print("Toggle drawer");
+    state.zoomDrawerController.toggle?.call();
+    update();
+  }
 }

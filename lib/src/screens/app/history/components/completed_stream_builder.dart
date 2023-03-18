@@ -29,7 +29,7 @@ StreamBuilder<QuerySnapshot<Map<String, dynamic>>> completedStreamBuilder(
         if (snapshot.data.docs.length == 0) {
           return Center(
             child: Text(
-              "No Booking Available",
+              "No Booking Completed",
               style: style.headline3,
             ),
           );

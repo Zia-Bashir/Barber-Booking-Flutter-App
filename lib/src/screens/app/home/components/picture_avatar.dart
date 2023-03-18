@@ -4,11 +4,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
 import 'package:the_barber/src/common/utils/app_images.dart';
+import 'package:the_barber/src/screens/app/home/controller.dart';
 
 class PictureAvatar extends StatelessWidget {
   const PictureAvatar({
     Key? key,
+    required this.controller,
   }) : super(key: key);
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -50,30 +53,35 @@ class PictureAvatar extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Container(
-                        height: 70.w,
-                        width: 70.w,
-                        decoration: BoxDecoration(
-                            color: AppColors.mainColor,
-                            shape: BoxShape.circle,
-                            image: snapshot.data.docs![0]['photourl'] == ""
-                                ? const DecorationImage(
-                                    image: AssetImage(noImage),
-                                    fit: BoxFit.cover)
-                                : DecorationImage(
-                                    image: NetworkImage(
-                                        snapshot.data.docs![0]['photourl']),
-                                    fit: BoxFit.cover),
-                            border: Border.all(
-                              width: 1,
+                      return GestureDetector(
+                        onTap: () {
+                          controller.toggleDrawer();
+                        },
+                        child: Container(
+                          height: 70.w,
+                          width: 70.w,
+                          decoration: BoxDecoration(
                               color: AppColors.mainColor,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: const Offset(0, 2),
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5)
-                            ]),
+                              shape: BoxShape.circle,
+                              image: snapshot.data.docs![0]['photourl'] == ""
+                                  ? const DecorationImage(
+                                      image: AssetImage(noImage),
+                                      fit: BoxFit.cover)
+                                  : DecorationImage(
+                                      image: NetworkImage(
+                                          snapshot.data.docs![0]['photourl']),
+                                      fit: BoxFit.cover),
+                              border: Border.all(
+                                width: 1,
+                                color: AppColors.mainColor,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: const Offset(0, 2),
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 5)
+                              ]),
+                        ),
                       );
                     }
                   },

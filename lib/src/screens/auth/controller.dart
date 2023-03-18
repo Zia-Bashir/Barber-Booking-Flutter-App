@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:the_barber/src/common/base/loading_widget.dart';
@@ -109,9 +110,11 @@ class AuthController extends GetxController {
   signOut() async {
     try {
       await _googleSignIn.signOut();
-      toastInfo(msg: "Logout Success");
+      await DefaultCacheManager().emptyCache();
+      await StorageServices.to.clear();
+      toastInfo(msg: "Logout Success", backgroundColor: AppColors.darkColor);
       await StorageServices.to.setBool(LOGIN_STATE, false);
-      //Get.offAllNamed(AppRoutes.SIGNIN);
+      Get.offAllNamed(AppRoutes.AUTH);
     } catch (e) {
       toastInfo(msg: "Error", backgroundColor: Colors.red);
     }

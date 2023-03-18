@@ -37,4 +37,8 @@ class StorageServices extends GetxController {
   Future<bool> remove(String key) async {
     return await pref.remove(key);
   }
+
+  Future<bool> clear() async {
+    return await pref.clear();
+  }
 }
