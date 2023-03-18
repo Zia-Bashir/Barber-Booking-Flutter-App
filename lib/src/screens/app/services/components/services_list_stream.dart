@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:the_barber/src/common/base/loading_widget.dart';
 import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/routes/routes.dart';
 import 'package:the_barber/src/common/utils/app_colors.dart';
