@@ -17,7 +17,12 @@ class MenuModel {
 
 var controller = AuthController();
 List<MenuModel> menuModel = [
-  MenuModel(title: "My Profile", icon: MyIcons.avatar, onTap: () {}),
+  MenuModel(
+      title: "My Profile",
+      icon: MyIcons.avatar,
+      onTap: () {
+        Get.toNamed(AppRoutes.PROFILE);
+      }),
   MenuModel(
       title: "Notification",
       icon: Icons.notifications,

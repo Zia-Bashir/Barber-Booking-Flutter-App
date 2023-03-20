@@ -5,6 +5,7 @@ import 'package:the_barber/src/screens/app/detail/index.dart';
 import 'package:the_barber/src/screens/app/history/index.dart';
 import 'package:the_barber/src/screens/app/home/index.dart';
 import 'package:the_barber/src/screens/app/notification/index.dart';
+import 'package:the_barber/src/screens/app/profile/index.dart';
 import 'package:the_barber/src/screens/app/search/index.dart';
 import 'package:the_barber/src/screens/app/services/index.dart';
 import 'package:the_barber/src/screens/auth/index.dart';
@@ -73,6 +74,13 @@ class AppPages {
       name: AppRoutes.NOTIFICATION,
       page: () => const NotificationScreen(),
       binding: NotificationBinding(),
+    ),
+
+    //= -- Profile Route
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => const ProfileScreen(),
+      binding: ProfileBinding(),
     ),
   ];
 }
