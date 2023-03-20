@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/routes/names.dart';
+import 'package:the_barber/src/common/utils/my_icons_icons.dart';
 import 'package:the_barber/src/screens/auth/controller.dart';
 
 class MenuModel {
@@ -16,7 +17,7 @@ class MenuModel {
 
 var controller = AuthController();
 List<MenuModel> menuModel = [
-  MenuModel(title: "My Profile", icon: Icons.person, onTap: () {}),
+  MenuModel(title: "My Profile", icon: MyIcons.avatar, onTap: () {}),
   MenuModel(
       title: "Notification",
       icon: Icons.notifications,
@@ -25,7 +26,7 @@ List<MenuModel> menuModel = [
       }),
   MenuModel(
       title: "History",
-      icon: Icons.history,
+      icon: MyIcons.history,
       onTap: () {
         Get.toNamed(AppRoutes.HISTORY);
       }),
@@ -35,7 +36,7 @@ List<MenuModel> menuModel = [
       onTap: () {
         Get.toNamed(AppRoutes.CART);
       }),
-  MenuModel(title: "Promotion", icon: Icons.newspaper, onTap: () {}),
+  MenuModel(title: "Setting", icon: MyIcons.setting, onTap: () {}),
   MenuModel(
       title: "Signout",
       icon: Icons.logout,
