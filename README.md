@@ -1,16 +1,4 @@
-# the_barber
+# Barber Booking App in Flutter
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Connect with your Firebase and replace services.json file. You can do it with Flutterfire or manually.
+Because I changed the rules, you will not be able to log in to this app. Set up your Firebase account
