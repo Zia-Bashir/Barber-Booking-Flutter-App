@@ -17,3 +17,7 @@ final cartRF = firestore
 
 final appointmentRF = firestore.collection("Appointment");
 final bookingRF = firestore.collection("Booking");
+final notificationRF = firestore
+    .collection("Notifications")
+    .doc(authCurrentUserMail)
+    .collection("notificaion");

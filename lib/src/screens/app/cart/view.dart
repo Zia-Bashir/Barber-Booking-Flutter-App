@@ -83,6 +83,9 @@ class CartScreen extends GetView<CartController> {
                 ],
               ),
             ),
+
+            //* ------------------ Book Your Appointment ------------------
+
             Positioned(
               bottom: 0,
               left: 0,

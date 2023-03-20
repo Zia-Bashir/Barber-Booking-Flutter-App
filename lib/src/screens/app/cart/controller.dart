@@ -321,10 +321,6 @@ class CartController extends GetxController {
           "status": "booked",
           "bookingTime": Timestamp.now()
         });
-        toastInfo(
-          msg: "Appointment Booked",
-          backgroundColor: AppColors.darkColor,
-        );
 
         //* ------------------ Time Slot Booking (True) ------------------
         await appointmentRF
@@ -358,9 +354,10 @@ class CartController extends GetxController {
     String date,
   ) {
     FcmServices.displyNotification(
+        isBooking: true,
         title: "Appointment Booked",
         body:
-            "Your ${slotTime.toString()} slot on ${date.toString()} is Booked");
+            "Your ${slotTime.toString()} slot on ${date.toString()} has been booked");
   }
 
   //// - ====================================================================== -

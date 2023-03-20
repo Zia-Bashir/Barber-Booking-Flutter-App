@@ -16,8 +16,11 @@ FlutterLocalNotificationsPlugin notificationsPlugin =
     FlutterLocalNotificationsPlugin();
 //* ------------------ FCM Background Message ------------------
 Future<void> backgroundHandler(RemoteMessage message) async {
+  print('---------Background State main');
+
   var title = message.notification!.title;
   var body = message.notification!.body;
+  Firebase.initializeApp();
   FcmServices.displyNotification(title: title!, body: body!);
 }
 
