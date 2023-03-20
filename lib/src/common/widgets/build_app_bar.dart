@@ -3,15 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:the_barber/src/common/entities/entities.dart';
-import 'package:the_barber/src/common/firebase/firebase.dart';
 import 'package:the_barber/src/common/utils/utils.dart';
 import 'package:the_barber/src/common/widgets/widget.dart';
-import 'package:the_barber/src/screens/app/cart/index.dart';
 import 'package:the_barber/src/screens/app/services/controller.dart';
-import 'package:badges/badges.dart' as badges;
 
 PreferredSize buildAppBar(BuildContext context, ServicesController controller) {
-  var cartController = CartController();
   var style = Theme.of(context).textTheme;
   return PreferredSize(
     preferredSize: Size.fromHeight(80.h),

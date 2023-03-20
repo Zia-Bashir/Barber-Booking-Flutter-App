@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -370,6 +372,6 @@ class CartController extends GetxController {
         batch.delete(doc.reference);
       }
       batch.commit().then((value) => print('All documents deleted'));
-    }).catchError((error) => print('Failed to delete documents: $error'));
+    });
   }
 }

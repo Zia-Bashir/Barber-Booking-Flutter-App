@@ -91,8 +91,6 @@ class FcmServices {
   static terminateNotification() {
     FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
-        print('---------Terminate State');
-
         if (message != null) {
           var title = message.notification!.title;
           var body = message.notification!.body;
@@ -120,7 +118,6 @@ class FcmServices {
   static foregroundNotification() {
     FirebaseMessaging.onMessage.listen(
       (message) {
-        print('---------Foreground State');
         if (message.notification != null) {
           if (message.notification != null) {
             var title = message.notification!.title;
@@ -141,7 +138,6 @@ class FcmServices {
   static backgroundNotification() {
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
-        print('---------Background State');
         if (message.notification != null) {
           var title = message.notification!.title;
           var body = message.notification!.body;

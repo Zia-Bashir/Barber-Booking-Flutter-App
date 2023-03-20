@@ -11,10 +11,6 @@ class DetailController extends GetxController {
     state.servicesId = data['id']!;
     state.servicesTitle = data['title']!;
 
-    print('2 ----- ${state.servicesId}');
-
-    print('2 ----- ${state.servicesTitle}');
-
     super.onInit();
   }
 }

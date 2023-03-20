@@ -28,6 +28,7 @@ class SearchController extends GetxController {
           snapshot.docs.map((doc) => doc.data()).toList();
       state.servicesList.assignAll(fetchedItems);
     } catch (e) {
+      // ignore: avoid_print
       print('Error in Fetching Services List ----- ${e.toString()}');
     }
   }
